@@ -1,0 +1,7 @@
+<html>
+<body>
+<h1>Welcome to FYME</h1>
+<p>Welcome ${firstName} ${lastName}.</p>
+<p>Thank you for joining the site.</p>
+</body>
+</html>

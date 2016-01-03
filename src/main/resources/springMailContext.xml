@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="saa.kulkarni@gmail.com" />
+		<property name="password" value="<!--  Gmail password -->" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="saa.kulkarni@gmail.com" />
+		<property name="to" value="saa.kulkarni@gmail.com" />
+		<property name="subject" value="Hello" />
+		<property name="text">
+			<value>
+	        <![CDATA[
+	            Dear %s,
+	            Mail Content : %s
+	        ]]>
+			</value>
+		</property>
+	</bean>
+
+
+	<!-- Configuring Velocity engine with Spring -->
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<props>
+				<prop key="resource.loader">class</prop>
+				<prop key="class.resource.loader.class">
+					org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</prop>				
+			</props>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="com.fyme.service" />
+
+</beans>
